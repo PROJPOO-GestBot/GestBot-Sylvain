@@ -20,6 +20,7 @@ async def on_message(message):
     elif message.content == "give me fun":
         role = discord.utils.get(message.guild.roles, name="fun") #role by id and not by name
         await message.author.add_roles(role)
+        await message.channel.send('here is a bunch of fun commin for ya')
 
 
 
