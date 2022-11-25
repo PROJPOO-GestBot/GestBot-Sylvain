@@ -1,28 +1,42 @@
 import discord
 
-intents = discord.Intents.default()
-intents.message_content = True
+intents = discord.Intents.all()
 
-client = discord.Client(intents=intents)
 
-@client.event
-async def on_ready():
-    print(f'We have logged in as {client.user}')
 
+class MyClient(discord.Client):
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target_message_id= 1045604480055513151
+
+    async def on_ready(self):
+        print("Bereit")
+
+    #giving roles
+    async def on_raw_reaction_add(self, payload): 
+        #print("couocou")
+        if payload.message_id != self.target_message_id:
+            return
+
+        guild = client.get_guild(payload.guild_id)
         
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+        if payload.emoji.name == "🤓":
+            role= discord.utils.get(guild.roles, name="nerd") # here give role code
+            await payload.member.add_roles(role)
 
-    if message.content.startswith('susPhrase'):
-        await message.channel.send('se masdak le code pénal')
-    elif message.content == "give me fun":
-        role = discord.utils.get(message.guild.roles, name="fun") #role by id and not by name
-        await message.author.add_roles(role)
-        await message.channel.send('here is a bunch of fun commin for ya')
+    #deleting roles
+    async def on_raw_reaction_remove(self, payload): 
+        #print("couocou")
+        if payload.message_id != self.target_message_id:
+            return
 
+        guild = client.get_guild(payload.guild_id)
+        member = guild.get_member(payload.user_id) 
 
+        if payload.emoji.name == "🤓":
+            role= discord.utils.get(guild.roles, name="nerd") # here give role code
+            await member.remove_roles(role)
 
+client = MyClient(intents=intents)
 
 client.run('MTA0MjczOTM3NTIwMjYzNTgyNg.GiuK7A.rl6ZSkQVMVbcA7RFG19v314cobYCfnE7juwwyM')
