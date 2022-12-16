@@ -8,7 +8,8 @@ intents = discord.Intents.all()
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.target_message_id = 1045604480055513151
+        self.target_message_id = 1050685802662858823
+
 
     async def on_ready(self):
         print("Bereit")
