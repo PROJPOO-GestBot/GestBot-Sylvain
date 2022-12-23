@@ -1,7 +1,10 @@
 import discord
+from dotenv import load_dotenv
+import os
 
 intents = discord.Intents.all()
 
+load_dotenv()
 
 
 class MyClient(discord.Client):
@@ -39,4 +42,5 @@ class MyClient(discord.Client):
 
 client = MyClient(intents=intents)
 
-client.run('MTA0MjczOTM3NTIwMjYzNTgyNg.GiuK7A.rl6ZSkQVMVbcA7RFG19v314cobYCfnE7juwwyM')
+
+client.run(os.getenv("BOT_TOKEN"))
