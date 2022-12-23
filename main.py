@@ -46,10 +46,7 @@ class MyClient(discord.Client):
 
 client = MyClient(intents=intents)
 
-<<<<<<< HEAD
+
 
 client.run(os.getenv("BOT_TOKEN"))
-=======
-# TODO Review : this key have to be stored outside the code
-client.run('MTA0MjczOTM3NTIwMjYzNTgyNg.GiuK7A.rl6ZSkQVMVbcA7RFG19v314cobYCfnE7juwwyM')
->>>>>>> 983fbaa250c1c6f024aabb95d6560ecb1e399773
+
